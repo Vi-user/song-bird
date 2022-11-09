@@ -298,11 +298,29 @@ const birdsData = {
     }
   ]
 };
+const names = Object.keys(birdsData);
+let counter = 0;
+let level = 0;
 
-const names = Object.keys(birdsData)
+class BirdCard {
+  constructor({id, name, species, description, image, audio}) {
+    this.id = id;
+    this.name = name;
+    this.species = species;
+    this.description = description;
+    this.image = image;
+    this.audio = audio;
+  }
 
+  generateBirdCard() {
+    let template = '';
+    const birdCard = createEl('article', 'bird-card');
+    birdCard.setAttribute('data-id', this.id);
+    // const im
+  }
+}
 
-function createElement(tag, ...classes) {
+function createEl(tag, ...classes) {
   const node = document.createElement(tag);
   node.classList.add(...classes);
   return node;
@@ -311,10 +329,53 @@ function createElement(tag, ...classes) {
 
 
 //Levels
-names.forEach( name => {
-  console.log('name', names.indexOf(name));
-  const levelsBlock = document.querySelector('.levels');
-  const level = (names.indexOf(name) === 0) ? createElement('span', 'level', 'level_active') : createElement('span', 'level');
-  level.textContent = name;
-  levelsBlock.append(level);
-})
+function drawLevels(names) {
+  names.forEach(name => {
+    console.log('name', names.indexOf(name));
+    const levelsBlock = document.querySelector('.levels');
+    const level = (names.indexOf(name) === 0) ? createEl('span', 'level', 'level_active') : createEl('span', 'level');
+    level.textContent = name;
+    levelsBlock.append(level);
+  })
+}
+
+//question-block
+const levelsBlock = document.querySelector('.question-block')
+
+
+//answer-options
+function drawOptions(arr) {
+  const optionsContainer = document.querySelector('.answer-options');
+  const listOptions = createEl('ul', 'options-list')
+  arr.forEach(item => {
+    const listItem = createEl('li', 'options-list__item');
+    listItem.setAttribute('data-id', arr.indexOf(item));
+    listItem.textContent = item;
+    listOptions.append(listItem);
+  })
+  optionsContainer.append(listOptions)
+}
+
+//bird-description
+function defaultDescription() {
+  const descriptionBlock = document.querySelector('.bird-description');
+  const para1 = createEl('p', 'start-description')
+  para1.textContent = 'Послушайте плеер.'
+  const para2 = createEl('p', 'start-description')
+  para2.textContent = 'Выберите птицу из списка'
+  descriptionBlock.append(para1, para2)
+}
+
+
+
+//controller
+window.onload = function () {
+  console.log('hi');
+  if (birdsData) {
+    drawLevels(names);
+    const curLevel = names.at(level)
+    const options = birdsData[curLevel].map(el => el.name)
+    drawOptions(options);
+  }
+  defaultDescription();
+}

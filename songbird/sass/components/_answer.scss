@@ -1,0 +1,48 @@
+.answer-block{
+  display: flex;
+  >* {
+    flex-basis: 50%;
+  }
+  gap: 3%;
+}
+
+.answer-options{
+  background: #1d1d1d;
+  border: 1px solid gray;
+  overflow: hidden;
+  border-radius: 5px;
+}
+
+.options-list__item{
+  position: relative;
+  display: flex;
+  align-items: center;
+  padding: 15px;
+  padding-left: 50px;
+  background: #1d1d1d;
+  cursor: pointer;
+  &:not(:last-child) {
+    border-bottom: 1px solid gray;
+  }
+  &:before{
+    content: "";
+    width: 8px;
+    height: 8px;
+    left: 25px;
+    background: gray;
+    position: absolute;
+    border-radius: 50%;
+  }
+}
+
+
+.bird-description{
+  background: #1d1d1d;
+  box-shadow: 0 0 2px #000;
+  border-radius: 5px;
+  border: 1px solid gray;
+}
+
+.start-description {
+  margin: 15px;
+}

@@ -368,3 +368,15 @@ template {
 [hidden] {
   display: none;
 }
+
+/**
+ * Delete list symbols
+ */
+li {
+  list-style: none;
+}
+
+ul {
+  margin: 0;
+  padding: 0;
+}

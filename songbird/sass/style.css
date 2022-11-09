@@ -325,6 +325,18 @@ template {
   display: none;
 }
 
+/**
+ * Delete list symbols
+ */
+li {
+  list-style: none;
+}
+
+ul {
+  margin: 0;
+  padding: 0;
+}
+
 html {
   font-size: 10px;
 }
@@ -334,6 +346,8 @@ body {
   font-size: 1.4rem;
   display: flex;
   flex-direction: column;
+  background: #111;
+  color: #c0c0c0;
 }
 
 .general {
@@ -362,12 +376,61 @@ body {
 }
 
 .level {
-  background: gray;
+  background: #1d1d1d;
+  box-shadow: 0 0 2px #000;
   padding: 10px;
   width: 100%;
 }
 .level_active {
-  background: darkgrey;
+  background: #3b3b3b;
+}
+
+.answer-block {
+  display: flex;
+  gap: 3%;
+}
+.answer-block > * {
+  flex-basis: 50%;
+}
+
+.answer-options {
+  background: #1d1d1d;
+  border: 1px solid gray;
+  overflow: hidden;
+  border-radius: 5px;
+}
+
+.options-list__item {
+  position: relative;
+  display: flex;
+  align-items: center;
+  padding: 15px;
+  padding-left: 50px;
+  background: #1d1d1d;
+  cursor: pointer;
+}
+.options-list__item:not(:last-child) {
+  border-bottom: 1px solid gray;
+}
+.options-list__item:before {
+  content: "";
+  width: 8px;
+  height: 8px;
+  left: 25px;
+  background: gray;
+  position: absolute;
+  border-radius: 50%;
+}
+
+.bird-description {
+  background: #1d1d1d;
+  box-shadow: 0 0 2px #000;
+  border-radius: 5px;
+  border: 1px solid gray;
+}
+
+.start-description {
+  margin: 15px;
 }
 
 .wrapper {
