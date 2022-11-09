@@ -1,0 +1,33 @@
+.general {
+  padding: 20px 0;
+}
+
+.logo-score {
+  display: flex;
+  justify-content: space-between;
+  padding-bottom: 20px;
+  align-items: center;
+}
+
+.score {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+.levels {
+  display: flex;
+  justify-content: space-between;
+  overflow: hidden;
+  text-align: center;
+  border-radius: 5px;
+}
+
+.level {
+  background: gray;
+  padding: 10px;
+  width: 100%;
+  &_active {
+    background: darkgrey;
+  }
+}
