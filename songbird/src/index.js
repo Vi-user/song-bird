@@ -312,6 +312,28 @@ class BirdCard {
     this.audio = audio;
   }
 
+  generateBirdQuestion() {
+    console.log(this)
+    const questionCard = createEl('div', 'question-container');
+    questionCard.setAttribute('data-id', this.id);
+
+    const defaultImg = createEl('img', 'bird-image');
+    defaultImg.setAttribute('src', './img/icons/default-bird.png')
+    defaultImg.setAttribute('alt', 'bird image');
+
+    const descriptionContainer = createEl('div', 'bird-question__description');
+    const defaultName = createEl('h2', 'bird-question__-name');
+    defaultName.textContent = '********';
+    const birdSong = createEl('audio', 'bird-question__-audio');
+    birdSong.setAttribute('controls', true)
+    const birdSongSrc = createEl('source');
+    birdSongSrc.setAttribute('src', this.audio)
+    birdSong.append(birdSongSrc)
+    descriptionContainer.append(defaultName, birdSong)
+    questionCard.append(defaultImg, descriptionContainer)
+    return questionCard;
+  }
+
   generateBirdCard() {
     let template = '';
     const birdCard = createEl('article', 'bird-card');
@@ -367,6 +389,18 @@ function defaultDescription() {
 }
 
 
+function getRandomNum(min, max) {
+  return Math.floor(Math.random() * (max - min)) + min;
+}
+
+
+function drawQuestion(curLevel, birdIndex) {
+  const questionContainer = document.querySelector('.question-block');
+  const birdObj = birdsData[curLevel][birdIndex]
+  const question = new BirdCard(birdObj);
+  const generateQuestion = question.generateBirdQuestion()
+  questionContainer.append(generateQuestion);
+}
 
 //controller
 window.onload = function () {
@@ -375,7 +409,10 @@ window.onload = function () {
     drawLevels(names);
     const curLevel = names.at(level)
     const options = birdsData[curLevel].map(el => el.name)
+    const randomBird = getRandomNum(0, 6);
+    drawQuestion(curLevel, randomBird)
     drawOptions(options);
+    defaultDescription();
   }
-  defaultDescription();
+  // defaultDescription();
 }

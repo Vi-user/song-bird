@@ -433,6 +433,18 @@ body {
   margin: 15px;
 }
 
+.question-container {
+  display: flex;
+  gap: 20px;
+  padding: 20px 0;
+}
+
+.bird-image {
+  width: 200px;
+  height: 100px;
+  border-radius: 8px;
+}
+
 .wrapper {
   width: 1000px;
   margin: auto;
