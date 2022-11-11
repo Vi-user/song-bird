@@ -350,6 +350,21 @@ body {
   color: #c0c0c0;
 }
 
+.quiz-button {
+  background: #236132;
+  width: 100%;
+  border-radius: 5px;
+  border: 1px solid gray;
+  color: inherit;
+  margin-top: 20px;
+  padding: 10px 0;
+  cursor: pointer;
+}
+.quiz-button:disabled {
+  background: #1d1d1d;
+  cursor: inherit;
+}
+
 .general {
   padding: 20px 0;
 }

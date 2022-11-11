@@ -305,6 +305,8 @@ let attempt = 5;
 let rightAnswerId;
 const winSound = new Audio('./src/sounds/right.mp3');
 const oopsSound = new Audio('./src/sounds/wrong.mp3');
+const levelBtn = document.querySelector('.quiz-button')
+
 
 class BirdCard {
   constructor({id, name, species, description, image, audio}) {
@@ -316,8 +318,8 @@ class BirdCard {
     this.audio = audio;
   }
 
-  generateBirdQuestion() {
-    console.log(this)
+  generateDefaultBirdQuestion() {
+    console.log('generateDefaultBirdQuestion', this)
     const questionCard = createEl('div', 'question-container');
     questionCard.setAttribute('data-id', this.id);
 
@@ -338,8 +340,30 @@ class BirdCard {
     return questionCard;
   }
 
+  generateBirdQuestion() {
+    console.log('generateBirdQuestion', this)
+    const questionCard = createEl('div', 'question-container');
+    questionCard.setAttribute('data-id', this.id);
+
+    const birdImg = createEl('img', 'bird-image');
+    birdImg.setAttribute('src', this.image)
+    birdImg.setAttribute('alt', 'bird image');
+
+    const descriptionContainer = createEl('div', 'bird-question__description');
+    const birdName = createEl('h2', 'bird-question__name');
+    birdName.textContent = this.name;
+    const birdSong = createEl('audio', 'bird-question__audio');
+    birdSong.setAttribute('controls', true)
+    const birdSongSrc = createEl('source');
+    birdSongSrc.setAttribute('src', this.audio)
+    birdSong.append(birdSongSrc)
+    descriptionContainer.append(birdName, birdSong)
+    questionCard.append(birdImg, descriptionContainer)
+    return questionCard;
+  }
+
   generateBirdCard() {
-    console.log(this)
+    // console.log(this)
     const answerCard = createEl('div', 'answer-container');
     answerCard.setAttribute('data-id', this.id);
 
@@ -380,17 +404,12 @@ function createEl(tag, ...classes) {
 //Levels
 function drawLevels(names) {
   names.forEach(name => {
-    console.log('name', names.indexOf(name));
     const levelsBlock = document.querySelector('.levels');
     const level = (names.indexOf(name) === 0) ? createEl('span', 'level', 'level_active') : createEl('span', 'level');
     level.textContent = name;
     levelsBlock.append(level);
   })
 }
-
-//question-block
-const levelsBlock = document.querySelector('.question-block')
-
 
 //answer-options
 function drawOptions(arr) {
@@ -401,7 +420,9 @@ function drawOptions(arr) {
     listItem.setAttribute('data-id', item.id);
     listItem.textContent = item.name;
     listItem.addEventListener('click', (e) => {
-      checkAnswer(e, item.id)
+      checkAnswer(e, item.id);
+      // const isRightAnswer = checkAnswer(e, item.id);
+      // if (isRightAnswer) ? : ;
       showAnswer(e, item)
     })
     listOptions.append(listItem);
@@ -410,12 +431,15 @@ function drawOptions(arr) {
 }
 
 function checkAnswer(e, objNum) {
-  console.log(e)
+  // return objNum === rightAnswerId;
+  // console.log(e)
   if (objNum === rightAnswerId) {
     score += attempt;
     document.querySelector('.score__number').textContent = score;
     e.target.classList.add("options-list__item_right");
-    winSound.play()
+    winSound.play();
+    levelBtn.removeAttribute('disabled');
+    drawImgNameInQuestion()
   } else {
     (attempt !== 0) ? attempt-- : '';
     e.target.classList.add("options-list__item_wrong");
@@ -447,12 +471,23 @@ function getRandomNum(min, max) {
 }
 
 
+function drawImgNameInQuestion() {
+  const questionContainer = document.querySelector('.question-block');
+  const curLevelName = levelNames.at(level)
+  const birdObj = birdsData[curLevelName].filter(el => el.id === rightAnswerId)[0]
+  const question = new BirdCard(birdObj);
+  const generateQuestion = question.generateBirdQuestion()
+  questionContainer.textContent = '';
+  questionContainer.append(generateQuestion);
+}
+
 function drawQuestion(curLevel, birdIndex) {
   const questionContainer = document.querySelector('.question-block');
   const birdObj = birdsData[curLevel][birdIndex];
+  // console.log('birdObj', birdObj)
   rightAnswerId = birdObj.id;
   const question = new BirdCard(birdObj);
-  const generateQuestion = question.generateBirdQuestion()
+  const generateQuestion = question.generateDefaultBirdQuestion()
   questionContainer.append(generateQuestion);
 }
 
@@ -462,14 +497,15 @@ window.onload = function makeRound() {
   console.log('songBird');
   if (birdsData) {
     drawLevels(levelNames);
-    const curLevel = levelNames.at(level)
-    const randomBird = getRandomNum(0, 6);
-
-    drawQuestion(curLevel, randomBird)
+    const curLevelName = levelNames.at(level)
+    const randomBirdNum = getRandomNum(0, 6);
+    // console.log(randomBird)
+    //
+    drawQuestion(curLevelName, randomBirdNum)
     // const options = birdsData[curLevel].map(el => el.name)
     // drawOptions(options);
-    const birdsOptions = birdsData[curLevel]
-    console.log(birdsOptions)
+    const birdsOptions = birdsData[curLevelName]
+    console.log('birdsOptions', birdsOptions)
     drawOptions(birdsOptions);
     defaultDescription();
   }
