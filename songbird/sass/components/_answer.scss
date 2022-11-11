@@ -21,12 +21,6 @@
   padding-left: 50px;
   background: #1d1d1d;
   cursor: pointer;
-  &_wrong{
-    color: red;
-  }
-  &_right{
-    color: green;
-  }
   &:not(:last-child) {
     border-bottom: 1px solid gray;
   }
@@ -38,6 +32,12 @@
     background: gray;
     position: absolute;
     border-radius: 50%;
+  }
+  &_wrong:before{
+    background: red;
+  }
+  &_right:before{
+    background: green;
   }
 }
 

@@ -424,12 +424,6 @@ body {
   background: #1d1d1d;
   cursor: pointer;
 }
-.options-list__item_wrong {
-  color: red;
-}
-.options-list__item_right {
-  color: green;
-}
 .options-list__item:not(:last-child) {
   border-bottom: 1px solid gray;
 }
@@ -441,6 +435,12 @@ body {
   background: gray;
   position: absolute;
   border-radius: 50%;
+}
+.options-list__item_wrong:before {
+  background: red;
+}
+.options-list__item_right:before {
+  background: green;
 }
 
 .bird-description {

@@ -403,9 +403,6 @@ function createEl(tag, ...classes) {
   return node;
 }
 
-
-
-
 //Levels
 function drawLevels(names) {
   if (levelsContainer.hasChildNodes()) levelsContainer.textContent = '';
