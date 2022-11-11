@@ -306,7 +306,11 @@ let rightAnswerId;
 const winSound = new Audio('./src/sounds/right.mp3');
 const oopsSound = new Audio('./src/sounds/wrong.mp3');
 const levelBtn = document.querySelector('.quiz-button')
-
+levelBtn.addEventListener('click', changeLevel)
+const questionContainer = document.querySelector('.question-block');
+const optionsContainer = document.querySelector('.answer-options');
+const descriptionBlock = document.querySelector('.bird-description');
+const levelsContainer = document.querySelector('.levels');
 
 class BirdCard {
   constructor({id, name, species, description, image, audio}) {
@@ -401,19 +405,29 @@ function createEl(tag, ...classes) {
 
 
 
+
 //Levels
 function drawLevels(names) {
+  if (levelsContainer.hasChildNodes()) levelsContainer.textContent = '';
   names.forEach(name => {
-    const levelsBlock = document.querySelector('.levels');
-    const level = (names.indexOf(name) === 0) ? createEl('span', 'level', 'level_active') : createEl('span', 'level');
-    level.textContent = name;
-    levelsBlock.append(level);
+    // const levelsBlock = document.querySelector('.levels');
+    const levelItem = (names.indexOf(name) === level) ? createEl('span', 'level', 'level_active') : createEl('span', 'level');
+    levelItem.textContent = name;
+    levelsContainer.append(levelItem);
   })
+}
+
+function changeLevel() {
+  level++;
+  attempt = 5;
+  levelBtn.setAttribute('disabled', 'true');
+  makeRound();
+  drawLevels(levelNames);
 }
 
 //answer-options
 function drawOptions(arr) {
-  const optionsContainer = document.querySelector('.answer-options');
+  // const optionsContainer = document.querySelector('.answer-options');
   const listOptions = createEl('ul', 'options-list')
   arr.forEach(item => {
     const listItem = createEl('li', 'options-list__item');
@@ -425,6 +439,7 @@ function drawOptions(arr) {
       // if (isRightAnswer) ? : ;
       showAnswer(e, item)
     })
+    if (optionsContainer.hasChildNodes()) optionsContainer.textContent = '';
     listOptions.append(listItem);
   })
   optionsContainer.append(listOptions)
@@ -449,7 +464,7 @@ function checkAnswer(e, objNum) {
 
 //drawAnswer
 function showAnswer(e, item) {
-  const descriptionBlock = document.querySelector('.bird-description');
+  // const descriptionBlock = document.querySelector('.bird-description');
   const answer = new BirdCard(item).generateBirdCard()
   descriptionBlock.textContent = '';
   descriptionBlock.append(answer)
@@ -457,11 +472,12 @@ function showAnswer(e, item) {
 
 //bird-description
 function defaultDescription() {
-  const descriptionBlock = document.querySelector('.bird-description');
+  // const descriptionBlock = document.querySelector('.bird-description');
   const para1 = createEl('p', 'start-description')
   para1.textContent = 'Послушайте плеер.'
   const para2 = createEl('p', 'start-description')
-  para2.textContent = 'Выберите птицу из списка'
+  para2.textContent = 'Выберите птицу из списка';
+  if (descriptionBlock.hasChildNodes()) descriptionBlock.textContent = '';
   descriptionBlock.append(para1, para2)
 }
 
@@ -472,7 +488,7 @@ function getRandomNum(min, max) {
 
 
 function drawImgNameInQuestion() {
-  const questionContainer = document.querySelector('.question-block');
+  // const questionContainer = document.querySelector('.question-block');
   const curLevelName = levelNames.at(level)
   const birdObj = birdsData[curLevelName].filter(el => el.id === rightAnswerId)[0]
   const question = new BirdCard(birdObj);
@@ -482,32 +498,46 @@ function drawImgNameInQuestion() {
 }
 
 function drawQuestion(curLevel, birdIndex) {
-  const questionContainer = document.querySelector('.question-block');
+  // const questionContainer = document.querySelector('.question-block');
   const birdObj = birdsData[curLevel][birdIndex];
   // console.log('birdObj', birdObj)
   rightAnswerId = birdObj.id;
   const question = new BirdCard(birdObj);
   const generateQuestion = question.generateDefaultBirdQuestion()
+  if (questionContainer.hasChildNodes()) questionContainer.textContent = '';
   questionContainer.append(generateQuestion);
 }
 
-
-//controller
-window.onload = function makeRound() {
-  console.log('songBird');
+function makeRound() {
   if (birdsData) {
-    drawLevels(levelNames);
     const curLevelName = levelNames.at(level)
     const randomBirdNum = getRandomNum(0, 6);
-    // console.log(randomBird)
-    //
     drawQuestion(curLevelName, randomBirdNum)
-    // const options = birdsData[curLevel].map(el => el.name)
-    // drawOptions(options);
     const birdsOptions = birdsData[curLevelName]
-    console.log('birdsOptions', birdsOptions)
+    // console.log('birdsOptions', birdsOptions)
     drawOptions(birdsOptions);
     defaultDescription();
   }
+}
+
+//controller
+window.onload = function () {
+  console.log('songBird');
+  drawLevels(levelNames);
+  makeRound()
+  // if (birdsData) {
+  //   drawLevels(levelNames);
+  //   const curLevelName = levelNames.at(level)
+  //   const randomBirdNum = getRandomNum(0, 6);
+  //   // console.log(randomBird)
+  //   //
+  //   drawQuestion(curLevelName, randomBirdNum)
+  //   // const options = birdsData[curLevel].map(el => el.name)
+  //   // drawOptions(options);
+  //   const birdsOptions = birdsData[curLevelName]
+  //   console.log('birdsOptions', birdsOptions)
+  //   drawOptions(birdsOptions);
+  //   defaultDescription();
+  // }
   // defaultDescription();
 }
