@@ -482,6 +482,38 @@ body {
   padding: 10px;
 }
 
+.results-wrapper {
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  align-content: center;
+  justify-content: center;
+}
+
+.results-block {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  font-size: clamp(3rem, 75%, 4rem);
+}
+
+.results-block__button {
+  cursor: pointer;
+  border-radius: 5px;
+  border: 1px solid gray;
+  color: inherit;
+  padding: 10px 0;
+  transition: all 0.2s ease;
+}
+.results-block__button:hover {
+  background: #236132;
+}
+
+.result-quantity {
+  color: darksalmon;
+}
+
 .wrapper {
   width: 1000px;
   margin: auto;

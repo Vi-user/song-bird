@@ -299,8 +299,11 @@ const birdsData = {
   ]
 };
 const levelNames = Object.keys(birdsData);
-let score = 0;
-let level = 0;
+const lastRound = levelNames.length-1;
+let score = 25;
+let level = 5;
+// let score = 0;
+// let level = 0;
 let attempt = 5;
 let rightAnswerId;
 const winSound = new Audio('../sounds/right.mp3');
@@ -415,11 +418,11 @@ function drawLevels(names) {
 }
 
 function changeLevel() {
-  level++;
-  attempt = 5;
-  levelBtn.setAttribute('disabled', 'true');
-  makeRound();
-  drawLevels(levelNames);
+    level++;
+    attempt = 5;
+    levelBtn.setAttribute('disabled', 'true');
+    makeRound();
+    drawLevels(levelNames);
 }
 
 //answer-options
@@ -443,20 +446,38 @@ function drawOptions(arr) {
 }
 
 function checkAnswer(e, objNum) {
-  // return objNum === rightAnswerId;
-  // console.log(e)
   if (objNum === rightAnswerId) {
+    console.log('score', score);
     score += attempt;
     document.querySelector('.score__number').textContent = score;
     e.target.classList.add("options-list__item_right");
     winSound.play();
-    levelBtn.removeAttribute('disabled');
     drawImgNameInQuestion()
+    if (level !== lastRound) {
+      console.log('score not last round', score);
+      levelBtn.removeAttribute('disabled');
+    } else {
+      console.log('redirect')
+      sessionStorage.setItem('score', score)
+      window.location.href = '../pages/results.html';
+    }
   } else {
-    (attempt !== 0) ? attempt-- : '';
-    e.target.classList.add("options-list__item_wrong");
-    oopsSound.play()
-  }
+        (attempt !== 0) ? attempt-- : '';
+        e.target.classList.add("options-list__item_wrong");
+        oopsSound.play()
+    }
+  // if (objNum === rightAnswerId) {
+  //   score += attempt;
+  //   document.querySelector('.score__number').textContent = score;
+  //   e.target.classList.add("options-list__item_right");
+  //   winSound.play();
+  //   levelBtn.removeAttribute('disabled');
+  //   drawImgNameInQuestion()
+  // } else {
+  //   (attempt !== 0) ? attempt-- : '';
+  //   e.target.classList.add("options-list__item_wrong");
+  //   oopsSound.play()
+  // }
 }
 
 //drawAnswer
@@ -517,24 +538,12 @@ function makeRound() {
   }
 }
 
+
+
 //controller
 window.onload = function () {
   console.log('songBird');
   drawLevels(levelNames);
   makeRound()
-  // if (birdsData) {
-  //   drawLevels(levelNames);
-  //   const curLevelName = levelNames.at(level)
-  //   const randomBirdNum = getRandomNum(0, 6);
-  //   // console.log(randomBird)
-  //   //
-  //   drawQuestion(curLevelName, randomBirdNum)
-  //   // const options = birdsData[curLevel].map(el => el.name)
-  //   // drawOptions(options);
-  //   const birdsOptions = birdsData[curLevelName]
-  //   console.log('birdsOptions', birdsOptions)
-  //   drawOptions(birdsOptions);
-  //   defaultDescription();
-  // }
-  // defaultDescription();
 }
+
