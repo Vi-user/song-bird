@@ -303,8 +303,8 @@ let score = 0;
 let level = 0;
 let attempt = 5;
 let rightAnswerId;
-const winSound = new Audio('./src/sounds/right.mp3');
-const oopsSound = new Audio('./src/sounds/wrong.mp3');
+const winSound = new Audio('../sounds/right.mp3');
+const oopsSound = new Audio('../sounds/wrong.mp3');
 const levelBtn = document.querySelector('.quiz-button')
 levelBtn.addEventListener('click', changeLevel)
 const questionContainer = document.querySelector('.question-block');
@@ -328,7 +328,7 @@ class BirdCard {
     questionCard.setAttribute('data-id', this.id);
 
     const defaultImg = createEl('img', 'bird-image');
-    defaultImg.setAttribute('src', './img/icons/default-bird.png')
+    defaultImg.setAttribute('src', '../img/icons/default-bird.png')
     defaultImg.setAttribute('alt', 'bird image');
 
     const descriptionContainer = createEl('div', 'bird-question__description');
