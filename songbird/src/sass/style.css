@@ -520,6 +520,15 @@ body {
   padding: 0 20px;
 }
 
+.index-page__wrapper {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  justify-content: space-between;
+  background: oldlace;
+  color: black;
+}
+
 .header {
   display: flex;
   justify-content: space-between;
@@ -537,6 +546,31 @@ body {
 }
 .navigation__item:hover {
   color: darksalmon;
+}
+
+.footer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 70px;
+  padding: 10px 0;
+}
+
+.icon {
+  display: block;
+  width: 50px;
+  height: 30px;
+}
+.icon_github {
+  background: url("../img/icons/github.svg") no-repeat center;
+  background-size: contain;
+}
+.icon_rsschool {
+  background: url("../img/icons/rs_school_js.svg") no-repeat center;
+  background-size: contain;
+}
+.icon:hover {
+  transform: scale(1.1);
 }
 
 /*# sourceMappingURL=style.css.map */

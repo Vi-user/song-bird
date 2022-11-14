@@ -1,0 +1,24 @@
+.footer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 70px;
+  padding: 10px 0;
+}
+
+.icon {
+  display: block;
+  width: 50px;
+  height: 30px;
+  &_github {
+    background: url("../img/icons/github.svg") no-repeat center;
+    background-size: contain;
+  }
+  &_rsschool {
+    background: url("../img/icons/rs_school_js.svg") no-repeat center;
+    background-size: contain;
+  }
+  &:hover{
+    transform: scale(1.1);
+  }
+}
