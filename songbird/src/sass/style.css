@@ -555,6 +555,17 @@ body {
     opacity: 1;
   }
 }
+.gallery-container {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+}
+
+.gallery-container__card {
+  border-radius: 5px;
+  border: 1px solid gray;
+}
+
 .wrapper {
   width: 1000px;
   margin: auto;
@@ -584,6 +595,10 @@ body {
   padding: 0 10px;
   cursor: pointer;
   transition: all 0.3s ease;
+}
+.navigation__item_active {
+  color: darksalmon;
+  cursor: initial;
 }
 .navigation__item:hover {
   color: darksalmon;
