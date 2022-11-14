@@ -1,0 +1,41 @@
+.main-index-block {
+  position: relative;
+  font-size: 4rem;
+  height: 100%;
+  font-weight: bold;
+}
+
+.main-paragraph {
+  position: absolute;
+  opacity: 0;
+  &_first {
+    left: 37%;
+    top: 20%;
+  }
+  &_second {
+    right: 30%;
+    top: 35%;
+  }
+  &_third {
+    left: 23%;
+    top: 50%;
+  }
+  &_forth {
+    right: 20%;
+    top: 65%;
+  }
+}
+
+.show-paragraph {
+  animation: show-paragraph 3s ease;
+  opacity: 1;
+}
+
+@keyframes show-paragraph {
+  0% {
+    opacity: 0
+  }
+  100% {
+    opacity: 1
+  }
+}

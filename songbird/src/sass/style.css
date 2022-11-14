@@ -514,6 +514,47 @@ body {
   color: darksalmon;
 }
 
+.main-index-block {
+  position: relative;
+  font-size: 4rem;
+  height: 100%;
+  font-weight: bold;
+}
+
+.main-paragraph {
+  position: absolute;
+  opacity: 0;
+}
+.main-paragraph_first {
+  left: 37%;
+  top: 20%;
+}
+.main-paragraph_second {
+  right: 30%;
+  top: 35%;
+}
+.main-paragraph_third {
+  left: 23%;
+  top: 50%;
+}
+.main-paragraph_forth {
+  right: 20%;
+  top: 65%;
+}
+
+.show-paragraph {
+  animation: show-paragraph 3s ease;
+  opacity: 1;
+}
+
+@keyframes show-paragraph {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
 .wrapper {
   width: 1000px;
   margin: auto;
