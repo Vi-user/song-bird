@@ -467,6 +467,14 @@ body {
   object-fit: cover;
 }
 
+.bird-question__description {
+  width: 100%;
+}
+
+.bird-question__name {
+  margin: 20px 0;
+}
+
 .answer-container {
   display: grid;
   grid-template-columns: repeat(2, 1fr);

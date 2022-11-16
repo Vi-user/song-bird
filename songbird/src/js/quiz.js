@@ -300,10 +300,10 @@ const birdsData = {
 };
 const levelNames = Object.keys(birdsData);
 const lastRound = levelNames.length-1;
-let score = 25;
-let level = 5;
-// let score = 0;
-// let level = 0;
+// let score = 25;
+// let level = 5;
+let score = 0;
+let level = 0;
 let attempt = 5;
 let rightAnswerId;
 const winSound = new Audio('../sounds/right.mp3');
@@ -314,6 +314,121 @@ const questionContainer = document.querySelector('.question-block');
 const optionsContainer = document.querySelector('.answer-options');
 const descriptionBlock = document.querySelector('.bird-description');
 const levelsContainer = document.querySelector('.levels');
+
+class Player {
+  constructor(src) {
+    this.src = src;
+    this.player = '';
+    this.playBtn = '';
+    this.btnImg = '';
+    this.soundBtn = '';
+    this.soundImg = '';
+    this.progressContainer = '';
+    this.progressBar = '';
+    this.audio = '';
+    this.volumeBar = '';
+  }
+
+  generatePlayer() {
+    this.player = createEl('div', 'player')
+
+    this.audio = createEl('audio', 'player__audio')
+    this.audio.setAttribute('src', this.src)
+
+    this.playBtn = createEl('span', 'player-btn__play')
+    this.btnImg = createEl('img', 'player-btn__img')
+    this.btnImg.setAttribute('src', '../img/icons/play.svg')
+    this.playBtn.append(this.btnImg);
+
+    this.progressContainer = createEl('div', 'player__progress-container')
+    this.progressBar = createEl('div', 'player__progress-bar')
+    this.progressContainer.append(this.progressBar)
+
+    this.soundBtn = createEl('span', 'player__sound-btn')
+    this.soundImg = createEl('img', 'player__sound-btn-img')
+    this.soundImg.setAttribute('src', '../img/icons/sound.png')
+    this.volumeBar = createEl('input', 'player__volume-bar');
+    this.volumeBar.value = 37;
+    this.volumeBar.step = 1;
+    this.volumeBar.min = 0;
+    this.volumeBar.max = 100;
+    this.volumeBar.type = 'range';
+
+    this.soundBtn.append(this.soundImg, this.volumeBar);
+
+    this.player.append(this.audio, this.playBtn, this.progressContainer, this.soundBtn)
+
+    this.bindEvents();
+
+    return this.player;
+  }
+
+  bindEvents() {
+    // const obj = this;
+    this.playBtn.addEventListener('click', () => {
+      const isPlaying = this.player.classList.contains('play_song');
+      isPlaying ? this.pauseSong() : this.playSong();
+    })
+    this.audio.addEventListener('timeupdate', (e) => {
+      this.updateProgress(e)
+    })
+    this.progressContainer.addEventListener('click', (e) => {
+      this.changeAudioTime(e)
+    })
+    this.audio.addEventListener('ended', () => {
+      this.changeParams()
+    })
+    this.soundBtn.addEventListener('click', () => {
+      this.drawVolumeScale()
+    })
+    this.volumeBar.addEventListener('input', (e) => {
+      this.changeVolume()
+    })
+  }
+
+  playSong() {
+    this.player.classList.toggle('play_song')
+    this.btnImg.src = "../img/icons/pause.svg"
+    this.audio.play()
+    this.audio.volume = 0.37;
+  }
+
+  pauseSong() {
+    this.player.classList.toggle('play_song')
+    this.btnImg.src = "../img/icons/play.svg"
+    this.audio.pause()
+  }
+
+  updateProgress(e) {
+    const { duration, currentTime} = e.target;
+    this.progressPercents = currentTime / duration * 100;
+    this.progressBar.style.width = `${this.progressPercents}%`
+
+  }
+
+  changeAudioTime(e) {
+    const width = e.target.clientWidth;
+    const clickedPlace = e.offsetX;
+    const duration = this.audio.duration;
+    this.audio.currentTime = clickedPlace / width * duration;
+  }
+
+  changeParams() {
+    this.btnImg.src = "../img/icons/play.svg";
+    this.player.classList.toggle('play_song')
+    this.progressBar.style.width = '0%';
+  }
+
+  drawVolumeScale() {
+    this.volumeBar.classList.toggle('show-bar')
+  }
+
+  changeVolume(e) {
+    const volumeValue = this.volumeBar.value;
+    this.volumeBar.style.background = `-webkit-linear-gradient(left, #8b2604 0%, #8b2604 ${volumeValue}%, darksalmon ${volumeValue}%, darksalmon 100%)`;
+    this.audio.volume = volumeValue/100;
+  }
+}
 
 class BirdCard {
   constructor({id, name, species, description, image, audio}) {
@@ -337,11 +452,9 @@ class BirdCard {
     const descriptionContainer = createEl('div', 'bird-question__description');
     const defaultName = createEl('h2', 'bird-question__name');
     defaultName.textContent = '********';
-    const birdSong = createEl('audio', 'bird-question__audio');
-    birdSong.setAttribute('controls', true)
-    const birdSongSrc = createEl('source');
-    birdSongSrc.setAttribute('src', this.audio)
-    birdSong.append(birdSongSrc)
+
+    const birdSong = new Player(this.audio).generatePlayer();
+
     descriptionContainer.append(defaultName, birdSong)
     questionCard.append(defaultImg, descriptionContainer)
     return questionCard;
@@ -359,11 +472,9 @@ class BirdCard {
     const descriptionContainer = createEl('div', 'bird-question__description');
     const birdName = createEl('h2', 'bird-question__name');
     birdName.textContent = this.name;
-    const birdSong = createEl('audio', 'bird-question__audio');
-    birdSong.setAttribute('controls', true)
-    const birdSongSrc = createEl('source');
-    birdSongSrc.setAttribute('src', this.audio)
-    birdSong.append(birdSongSrc)
+
+    const birdSong = new Player(this.audio).generatePlayer();
+
     descriptionContainer.append(birdName, birdSong)
     questionCard.append(birdImg, descriptionContainer)
     return questionCard;
@@ -385,11 +496,8 @@ class BirdCard {
     const birdNameEn = createEl('h3', 'bird-question__en-name');
     birdNameEn.textContent = this.species;
 
-    const birdSong = createEl('audio', 'bird-question__audio');
-    birdSong.setAttribute('controls', true)
-    const birdSongSrc = createEl('source');
-    birdSongSrc.setAttribute('src', this.audio)
-    birdSong.append(birdSongSrc)
+    const birdSong = new Player(this.audio).generatePlayer();
+
     descriptionContainer.append(birdName, birdNameEn, birdSong)
 
     const aboutContainer = createEl('div', 'bird-answer__about');

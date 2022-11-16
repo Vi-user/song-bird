@@ -403,7 +403,7 @@ class Player {
   }
 
   changeParams() {
-    this.btnImg.src = "./img/play.svg";
+    this.btnImg.src = "../img/icons/play.svg";
     this.player.classList.toggle('play_song')
     this.progressBar.style.width = '0%';
   }
