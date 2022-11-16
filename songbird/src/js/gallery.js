@@ -279,7 +279,8 @@ const birdsData = [
       name: 'Пеликан',
       species: 'Pelecanus',
       description: 'Пеликаны — обитатели морей и рек. Ходят они неуклюже, но хорошо летают и плавают. Питаются в основном рыбой, устраивают коллективные охоты — выстроившись полукругом хлопают по воде крыльями и клювами и вытесняют напуганную рыбу на мелководье.',
-      image: 'https://live.staticflickr.com/65535/49159147156_dcbbb5c12a.jpg',
+      // image: 'https://live.staticflickr.com/65535/49159147156_dcbbb5c12a.jpg',
+      image: 'https://animalreader.ru/wp-content/uploads/2014/02/australian-pelicans-floats-pic-001.jpg',
       audio: 'https://www.xeno-canto.org/sounds/uploaded/XAMHIHFTZG/XC331138-call1.mp3'
     },
     {
@@ -345,7 +346,6 @@ class Player {
     this.soundBtn.append(this.soundImg, this.volumeBar);
 
     this.player.append(this.audio, this.playBtn, this.progressContainer, this.soundBtn)
-    console.log(this.player)
 
     this.bindEvents();
 
@@ -353,7 +353,6 @@ class Player {
   }
 
   bindEvents() {
-    console.log('this bindEvents', this)
     // const obj = this;
     this.playBtn.addEventListener('click', () => {
       const isPlaying = this.player.classList.contains('play_song');
@@ -377,7 +376,6 @@ class Player {
   }
 
   playSong() {
-    console.log('this playSong', this)
     this.player.classList.toggle('play_song')
     this.btnImg.src = "../img/icons/pause.svg"
     this.audio.play()
@@ -391,10 +389,7 @@ class Player {
   }
 
   updateProgress(e) {
-    // console.log(e)
     const { duration, currentTime} = e.target;
-    // console.log(duration)
-    // console.log(currentTime)
     this.progressPercents = currentTime / duration * 100;
     this.progressBar.style.width = `${this.progressPercents}%`
 
