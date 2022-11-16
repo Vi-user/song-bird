@@ -9,6 +9,9 @@
   height: 150px;
   border-radius: 8px;
   object-fit: cover;
+  &_default {
+    object-fit: unset;
+  }
 }
 
 .bird-question__description {
@@ -17,4 +20,5 @@
 
 .bird-question__name {
   margin: 20px 0;
+  letter-spacing: 3px;
 }

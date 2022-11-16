@@ -371,7 +371,7 @@ class Player {
       this.drawVolumeScale()
     })
     this.volumeBar.addEventListener('input', (e) => {
-      this.changeVolume()
+      this.changeVolume(e)
     })
   }
 

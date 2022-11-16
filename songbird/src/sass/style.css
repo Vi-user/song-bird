@@ -342,7 +342,7 @@ html {
 }
 
 body {
-  font-family: "Roboto";
+  font-family: "Abhaya Libre";
   font-size: 1.4rem;
   display: flex;
   flex-direction: column;
@@ -466,6 +466,9 @@ body {
   border-radius: 8px;
   object-fit: cover;
 }
+.bird-image_default {
+  object-fit: unset;
+}
 
 .bird-question__description {
   width: 100%;
@@ -473,6 +476,7 @@ body {
 
 .bird-question__name {
   margin: 20px 0;
+  letter-spacing: 3px;
 }
 
 .answer-container {
