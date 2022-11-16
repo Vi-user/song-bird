@@ -307,6 +307,7 @@ let score = 0;
 let level = 0;
 let attempt = 5;
 let rightAnswerId;
+let wasGivenRightAnswer = false;
 const winSound = new Audio('../sounds/right.mp3');
 const oopsSound = new Audio('../sounds/wrong.mp3');
 const levelBtn = document.querySelector('.quiz-button')
@@ -442,7 +443,6 @@ class BirdCard {
   }
 
   generateDefaultBirdQuestion() {
-    console.log('generateDefaultBirdQuestion', this)
     const questionCard = createEl('div', 'question-container');
     questionCard.setAttribute('data-id', this.id);
 
@@ -462,7 +462,6 @@ class BirdCard {
   }
 
   generateBirdQuestion() {
-    console.log('generateBirdQuestion', this)
     const questionCard = createEl('div', 'question-container');
     questionCard.setAttribute('data-id', this.id);
 
@@ -529,6 +528,7 @@ function drawLevels(names) {
 function changeLevel() {
     level++;
     attempt = 5;
+    wasGivenRightAnswer = false;
     levelBtn.setAttribute('disabled', 'true');
     makeRound();
     drawLevels(levelNames);
@@ -556,42 +556,31 @@ function drawOptions(arr) {
 
 function checkAnswer(e, objNum) {
   if (objNum === rightAnswerId) {
-    console.log('score', score);
+    wasGivenRightAnswer = true;
     score += attempt;
     document.querySelector('.score__number').textContent = score;
     e.target.classList.add("options-list__item_right");
     winSound.play();
     drawImgNameInQuestion()
     if (level !== lastRound) {
-      console.log('score not last round', score);
       levelBtn.removeAttribute('disabled');
     } else {
-      console.log('redirect')
       sessionStorage.setItem('score', score)
-      window.location.href = '../pages/results.html';
+      setTimeout(() => {
+        window.location.href = '../pages/results.html'
+      }, 2000)
     }
   } else {
         (attempt !== 0) ? attempt-- : '';
-        e.target.classList.add("options-list__item_wrong");
-        oopsSound.play()
+        if (!wasGivenRightAnswer) {
+          e.target.classList.add("options-list__item_wrong");
+          oopsSound.play()
+        }
     }
-  // if (objNum === rightAnswerId) {
-  //   score += attempt;
-  //   document.querySelector('.score__number').textContent = score;
-  //   e.target.classList.add("options-list__item_right");
-  //   winSound.play();
-  //   levelBtn.removeAttribute('disabled');
-  //   drawImgNameInQuestion()
-  // } else {
-  //   (attempt !== 0) ? attempt-- : '';
-  //   e.target.classList.add("options-list__item_wrong");
-  //   oopsSound.play()
-  // }
 }
 
 //drawAnswer
 function showAnswer(e, item) {
-  // const descriptionBlock = document.querySelector('.bird-description');
   const answer = new BirdCard(item).generateBirdCard()
   descriptionBlock.textContent = '';
   descriptionBlock.append(answer)
