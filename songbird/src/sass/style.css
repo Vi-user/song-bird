@@ -535,6 +535,9 @@ body {
 
 .main-paragraph {
   position: absolute;
+  z-index: 2;
+  color: #cb9531;
+  text-shadow: 0 0 2px #cb9531, 0 0 2px #cb9531;
   opacity: 0;
 }
 .main-paragraph_first {
@@ -552,6 +555,28 @@ body {
 .main-paragraph_forth {
   right: 20%;
   top: 65%;
+}
+
+.symbol-question {
+  position: absolute;
+  color: green;
+  text-shadow: 0 0 2px green, 0 0 2px green;
+}
+
+.start-quiz__btn {
+  position: absolute;
+  z-index: 2;
+  left: 37%;
+  top: 78%;
+  border: 3px solid darksalmon;
+  background: #310c53;
+  border-radius: 8px;
+  padding: 10px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+.start-quiz__btn:hover {
+  background: green;
 }
 
 .show-paragraph {
