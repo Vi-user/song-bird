@@ -7,6 +7,7 @@
 
 .player-btn__play {
   cursor: pointer;
+  display: inherit;
 }
 
 .player-btn__img {
@@ -32,6 +33,8 @@
 
 .player__sound-btn {
   position: relative;
+  cursor: pointer;
+  display: inherit;
 }
 
 .player__sound-btn-img {
