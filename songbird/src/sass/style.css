@@ -681,7 +681,20 @@ body {
 .header {
   display: flex;
   justify-content: space-between;
+  align-items: center;
   padding: 20px 0;
+  position: sticky;
+  top: 0;
+  background: #111;
+  z-index: 2;
+}
+
+.logo__link {
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+.logo__link:hover {
+  color: darksalmon;
 }
 
 .navigation {
@@ -689,12 +702,14 @@ body {
 }
 
 .navigation__item {
+  font-size: clamp(1.9rem, 75%, 3rem);
   padding: 0 10px;
   cursor: pointer;
   transition: all 0.3s ease;
 }
 .navigation__item_active {
-  color: darksalmon;
+  color: green;
+  font-weight: bold;
   cursor: initial;
 }
 .navigation__item:hover {
