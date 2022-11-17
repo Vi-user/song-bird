@@ -348,6 +348,7 @@ body {
   background: #111;
   color: #c0c0c0;
   height: 100%;
+  overflow-x: hidden;
 }
 
 .main {
@@ -386,19 +387,28 @@ body {
   gap: 20px;
 }
 
+.score__number {
+  color: green;
+  font-weight: bold;
+}
+
 .levels {
-  display: flex;
-  justify-content: space-between;
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
   overflow: hidden;
   text-align: center;
   border-radius: 5px;
+}
+@media screen and (max-device-width: 700px) {
+  .levels {
+    grid-template-columns: repeat(3, 1fr);
+  }
 }
 
 .level {
   background: #1d1d1d;
   box-shadow: 0 0 2px #000;
-  padding: 10px;
-  width: 100%;
+  padding: 10px 0;
 }
 .level_active {
   background: #3b3b3b;
@@ -410,6 +420,15 @@ body {
 }
 .answer-block > * {
   flex-basis: 50%;
+}
+@media screen and (max-device-width: 600px) {
+  .answer-block {
+    flex-direction: column;
+    gap: 20px;
+  }
+  .answer-block > * {
+    flex-basis: 97%;
+  }
 }
 
 .answer-options {
@@ -473,21 +492,40 @@ body {
 .bird-image_default {
   object-fit: unset;
 }
+@media screen and (max-device-width: 600px) {
+  .bird-image {
+    width: 125px;
+    height: 89px;
+  }
+}
 
 .bird-question__description {
   width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
 }
 
 .bird-question__name {
-  margin: 20px 0;
   letter-spacing: 3px;
 }
 
 .answer-container {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: 200px auto;
   gap: 15px;
   padding: 12px;
+}
+@media screen and (max-device-width: 600px) {
+  .answer-container {
+    grid-template-columns: 150px auto;
+  }
+}
+
+.bird-answer__description {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
 }
 
 .bird-answer__about {
@@ -705,7 +743,7 @@ body {
 }
 
 .wrapper {
-  width: 97%;
+  width: 95%;
   max-width: 1200px;
   margin: auto;
   padding: 0 20px;

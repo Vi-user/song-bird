@@ -15,19 +15,29 @@
   gap: 20px;
 }
 
+.score__number {
+  color: green;
+  font-weight: bold;
+}
+
 .levels {
-  display: flex;
-  justify-content: space-between;
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  //display: flex;
+  //justify-content: space-between;
   overflow: hidden;
   text-align: center;
   border-radius: 5px;
+  @media screen and (max-device-width: 700px){
+    grid-template-columns: repeat(3, 1fr);
+  }
 }
 
 .level {
   background: #1d1d1d;
   box-shadow: 0 0 2px #000;
-  padding: 10px;
-  width: 100%;
+  padding: 10px 0;
+  //width: 100%;
   &_active {
     background: #3b3b3b;
   }

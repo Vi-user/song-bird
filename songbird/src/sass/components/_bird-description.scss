@@ -1,8 +1,17 @@
 .answer-container {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: 200px auto;
   gap: 15px;
   padding: 12px;
+  @media screen and (max-device-width: 600px){
+    grid-template-columns: 150px auto;
+  }
+}
+
+.bird-answer__description {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
 }
 
 
