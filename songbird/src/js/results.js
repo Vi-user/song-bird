@@ -9,8 +9,9 @@ window.onload = function () {
 
   if (!isMaxResult) {
     createBtnRestart()
+  } else {
+    createMaxResultphrase()
   }
-
 }
 
 function createEl(tag, ...classes) {
@@ -24,6 +25,12 @@ function createBtnRestart() {
   restartBtn.textContent = 'restart quiz'
   restartBtn.addEventListener('click', restartGame)
   mainSection.append(restartBtn)
+}
+
+function createMaxResultphrase() {
+  const addPara = createEl('p', 'results-block__text')
+  addPara.textContent = 'this is maximum possible points =)';
+  mainSection.append(addPara);
 }
 
 function restartGame() {

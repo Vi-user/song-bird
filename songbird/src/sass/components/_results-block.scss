@@ -1,11 +1,16 @@
 .results-block {
   display: flex;
-  text-align: center;
-  justify-content: center;
+  //text-align: center;
+  //justify-content: center;
   flex-direction: column;
   gap: 30px;
+  text-align: left;
+  justify-content: start;
+  padding: 120px;
   font-size: clamp(3rem, 75%, 4rem);
-
+  color: green;
+  animation: show-background 3s ease;
+  background: url("../img/salut2.jpg") no-repeat;
 }
 
 .results-block__button {
@@ -13,14 +18,29 @@
   border-radius: 8px;
   border: 3px solid darksalmon;
   color: inherit;
-  padding: 10px;
-  margin: 0 auto;
-  transition: all 0.2s ease;
+  background: #666464;
+  color: black;
+  padding: 2px;
+  max-width: 170px;
+  transition: all 1s ease;
   &:hover {
-    background: #236132;
+    background: #74ac74;
   }
 }
 
 .result-quantity {
   color: darksalmon;
+}
+
+@keyframes show-background {
+  0% {
+    opacity: 0;
+    -webkit-transform: scale(0, 0);
+    transform: scale(0, 0)
+  }
+  100% {
+    opacity: 1;
+    -webkit-transform: scale(1.0, 1.0);
+    transform: scale(1.0, 1.0);
+  }
 }
