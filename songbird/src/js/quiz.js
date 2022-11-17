@@ -556,20 +556,22 @@ function drawOptions(arr) {
 
 function checkAnswer(e, objNum) {
   if (objNum === rightAnswerId) {
-    wasGivenRightAnswer = true;
-    score += attempt;
-    document.querySelector('.score__number').textContent = score;
-    e.target.classList.add("options-list__item_right");
-    winSound.play();
-    drawImgNameInQuestion()
-    if (level !== lastRound) {
-      levelBtn.removeAttribute('disabled');
-    } else {
-      sessionStorage.setItem('score', score)
-      setTimeout(() => {
-        window.location.href = '../pages/results.html'
-      }, 2000)
+    if (!wasGivenRightAnswer) {
+      score += attempt;
+      document.querySelector('.score__number').textContent = score;
+      e.target.classList.add("options-list__item_right");
+      winSound.play();
+      drawImgNameInQuestion()
+      if (level !== lastRound) {
+        levelBtn.removeAttribute('disabled');
+      } else {
+        sessionStorage.setItem('score', score)
+        setTimeout(() => {
+          window.location.href = '../pages/results.html'
+        }, 2000)
+      }
     }
+    wasGivenRightAnswer = true;
   } else {
         (attempt !== 0) ? attempt-- : '';
         if (!wasGivenRightAnswer) {
