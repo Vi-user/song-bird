@@ -339,15 +339,19 @@ ul {
 
 html {
   font-size: 10px;
+  height: 100%;
 }
 
 body {
   font-family: "Abhaya Libre";
   font-size: 1.4rem;
-  display: flex;
-  flex-direction: column;
   background: #111;
   color: #c0c0c0;
+  height: 100%;
+}
+
+.main {
+  flex: 1 0 auto;
 }
 
 .quiz-button {
@@ -494,17 +498,10 @@ body {
   padding: 10px;
 }
 
-.results-wrapper {
-  height: 100vh;
-  display: flex;
-  align-items: center;
-  align-content: center;
-  justify-content: center;
-}
-
 .results-block {
-  text-align: center;
   display: flex;
+  text-align: center;
+  justify-content: center;
   flex-direction: column;
   gap: 30px;
   font-size: clamp(3rem, 75%, 4rem);
@@ -512,10 +509,11 @@ body {
 
 .results-block__button {
   cursor: pointer;
-  border-radius: 5px;
-  border: 1px solid gray;
+  border-radius: 8px;
+  border: 3px solid darksalmon;
   color: inherit;
-  padding: 10px 0;
+  padding: 10px;
+  margin: 0 auto;
   transition: all 0.2s ease;
 }
 .results-block__button:hover {
@@ -527,9 +525,7 @@ body {
 }
 
 .main-index-block {
-  position: relative;
   font-size: 4rem;
-  height: 100%;
   font-weight: bold;
 }
 
@@ -694,6 +690,9 @@ body {
   width: 1000px;
   margin: auto;
   padding: 0 20px;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
 }
 
 .index-page__wrapper {
@@ -743,6 +742,7 @@ body {
 
 .footer {
   display: flex;
+  flex: 0 0 auto;
   justify-content: space-evenly;
   align-items: center;
   padding: 10px 0;

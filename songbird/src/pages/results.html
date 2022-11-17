@@ -9,12 +9,33 @@
 </head>
 <body>
 
-<div class="wrapper results-wrapper">
-  <main class="results-block">
+<div class="wrapper">
+  <header class="header">
+    <h1 class="logo"><a href="../../index.html" class="logo__link">SongBird</a></h1>
+    <nav>
+      <ul class="navigation">
+        <li class="navigation__item"><a href="../../index.html">main</a></li>
+        <li class="navigation__item"><a href="./quiz.html">quiz</a></li>
+        <li class="navigation__item navigation__item_active"><a href="#">gallery</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main class="main results-block">
   <h2 class="results-block__title">congratulate!!!</h2>
   <p class="results-block__text">your result in quiz: <span class="result-quantity"></span></p>
 
   </main>
+
+  <footer class="footer">
+    <object type="image/svg+xml" data="../img/icons/github.svg" width="50" class="footer__item">
+      Your browser does not support SVG
+    </object>
+    <p class="footer__item">2022</p>
+    <object type="image/svg+xml" data="../img/icons/rs_school_js.svg" width="50">
+      Your browser does not support SVG
+    </object>
+  </footer>
 </div>
 
 <script src="../js/results.js"></script>

@@ -3,6 +3,9 @@
   width: 1000px;
   margin: auto;
   padding: 0 20px;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
 }
 
 .index-page__wrapper {

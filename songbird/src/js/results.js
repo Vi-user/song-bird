@@ -20,7 +20,7 @@ function createEl(tag, ...classes) {
 }
 
 function createBtnRestart() {
-  const restartBtn = createEl('button', 'button', 'results-block__button')
+  const restartBtn = createEl('button', 'results-block__button')
   restartBtn.textContent = 'restart quiz'
   restartBtn.addEventListener('click', restartGame)
   mainSection.append(restartBtn)

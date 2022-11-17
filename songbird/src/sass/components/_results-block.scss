@@ -1,14 +1,7 @@
-.results-wrapper {
-  height: 100vh;
-  display: flex;
-  align-items: center;
-  align-content: center;
-  justify-content: center;
-}
-
 .results-block {
-  text-align: center;
   display: flex;
+  text-align: center;
+  justify-content: center;
   flex-direction: column;
   gap: 30px;
   font-size: clamp(3rem, 75%, 4rem);
@@ -17,10 +10,11 @@
 
 .results-block__button {
   cursor: pointer;
-  border-radius: 5px;
-  border: 1px solid gray;
+  border-radius: 8px;
+  border: 3px solid darksalmon;
   color: inherit;
-  padding: 10px 0;
+  padding: 10px;
+  margin: 0 auto;
   transition: all 0.2s ease;
   &:hover {
     background: #236132;

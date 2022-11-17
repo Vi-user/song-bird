@@ -1,12 +1,18 @@
 html {
   font-size: 10px;
+  height: 100%;
 }
 
 body {
   font-family: 'Abhaya Libre';
   font-size: 1.4rem;
-  display: flex;
-  flex-direction: column;
+  //display: flex;
+  //flex-direction: column;
   background: #111;
   color: #c0c0c0;
+  height: 100%;
+}
+
+.main {
+  flex: 1 0 auto;
 }
