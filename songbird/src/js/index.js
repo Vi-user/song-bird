@@ -1,4 +1,4 @@
-console.log('main page')
+console.log('English version not implemented, everything else is crooked and askew, but done)')
 const paragraphList = document.querySelectorAll('.main-paragraph')
 const container = document.querySelector('.main-index-block')
 const startQuizBtn = document.querySelector('.start-quiz__btn')
